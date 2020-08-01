@@ -1,6 +1,6 @@
 # CEP Search API
 
-Search for address using CEP code from Brazil.
+Search for address using CEP code from Brazil. Based on cep.la/cep
 
 API developed using Ruby (2.7.0) and the following tools:
 * Rails (6.0.3.2)

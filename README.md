@@ -13,3 +13,5 @@ To run the application use the following command:
 - rails s -b 0.0.0.0
 
 You can use Insomnia or Postman to try the api.
+
+Postman file is on the project root dir.

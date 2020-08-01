@@ -1,24 +1,15 @@
-# README
+CEP Search API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Search for address using CEP code from Brazil.
 
-Things you may want to cover:
+API developed using Rails 6.
 
-* Ruby version
+To run, git clone the project and then on project folder you must run the following commands:
+- bundle
+- rails db:create
+- rails db:migrate
 
-* System dependencies
+To run the application use the following command:
+- rails s -b 0.0.0.0
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+You can use Insomnia or Postman to try the api.

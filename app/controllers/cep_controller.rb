@@ -1,4 +1,5 @@
 class CepController < ApplicationController
+  before_action :authorize_request
 
   BASE_URL = 'http://cep.la/'
 
@@ -13,28 +14,33 @@ class CepController < ApplicationController
             "Accept"        => "application/json"
           })
 
-        puts "Processing..."
-        #render json: { message: "CEP Received: #{cep}" }
+        auth_data = JsonWebToken.decode(request.authorization)
+
         if (!JSON.parse(@result.body).empty?)
           data = JSON.parse(@result.body)
 
-          @user = User.find(1)
-          #@search = SearchHistory.new(cep: data['cep'], address: data['logradouro'], neighborhood: data['bairro'], city: data['cidade'], state: data['uf'])
-          #test = {cep: 'a', address: 'b', neighborhood: 'c', city: 'd', state: 'e'}
+          @user = User.find(auth_data['user_id'])
+
           @result = @user.search_history.create(data)
 
-          puts "created..."
-
-          render json: { message: "CEP valido: " + cep}
+          render json: data, status: :ok
         else
           render json: { message: "Sem enderecos para o CEP informado: " + cep}
         end
       rescue HTTParty.Error
         render json: { message: "Ops, problemas ao buscar o seguinte CEP: " + cep}
+      rescue StandardError
+        render json: { message: "Erro ao consultar CEP, por favor tente novamente." }
       end
     else
       render json: { message: "CEP informado no formato incorreto: " + cep}
     end
+  end
+
+  # GET /cep/history
+  def history
+    @sh = SearchHistory.all
+    render json: @sh, status: :ok
   end
 
 

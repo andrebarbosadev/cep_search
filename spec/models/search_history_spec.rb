@@ -26,7 +26,7 @@ RSpec.describe SearchHistory, type: :model do
 
   context 'Instance Methods' do
     it 'Return full address' do
-      sh = build(:search_history)
+      sh = create(:search_history)
 
       expect(sh.full_address).to eq(
         "#{sh.logradouro}, #{sh.bairro}, #{sh.cidade} - #{sh.uf}")
